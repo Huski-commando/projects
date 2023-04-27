@@ -1,9 +1,26 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const url = 'https://course-api.com/react-tours-project';
 
 function App() {
-  useState();
+  const [isLoading, setIsLoading] = useState(true);
+  const [tours, setTours] = useState([]);
+
+const fetchTours = async () => {
+  setIsLoading(true);
+  try{
+    const response = await fetch(url);
+    const tours = await response.json()
+    console.log(tours);
+  }catch(e){
+    console.log(e);
+  }
+}
+ 
+  useEffect(() => {
+    fetchTours()
+  },[]);
+
   return (
     <div className="App">
       <p>Hello</p>
